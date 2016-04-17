@@ -12,11 +12,10 @@
     `PyQt5.base`基础版本。
 ## 2.1、`EncodeConv`
 * py2exe.bat批处理，通过ui生成界面代码，并生成可执行工具dist\EncodeConv.exe
-
+![py2exe.bat批处理](https://github.com/liaohw/Python/blob/master/EncodeConv/res/py2exe.jpg)
 * EncodeConv.py实现了编码格式转换逻辑
-
-
-![py2exe.bat批处理](https://github.com/liaohw/Python/blob/master/EncodeConv/res/runExe.jpg)
-
 ![EncodeConv.exe执行](https://github.com/liaohw/Python/blob/master/EncodeConv/res/runExe.jpg)
-<img src="https://github.com/liaohw/Python/blob/master/EncodeConv/res/runExe.jpg">
+
+
+
+
