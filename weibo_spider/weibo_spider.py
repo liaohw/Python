@@ -37,13 +37,11 @@ else:
 
 cookie = {"Cookie": "xxx"}
 
-
 # 获取微博名
 try:
     # 普通微博ID
-    u_flag = True
-    url = 'http://weibo.cn/u/%s?filter=1&page=1'%user_id
-    head_html = requests.get(url, cookies = cookie).content
+    url = 'http://weibo.cn/u/%s?filter=1&page='%user_id
+    head_html = requests.get("%s1"%(url), cookies = cookie).content
     selector = etree.HTML(head_html)
     page_num = (int)(selector.xpath('//input[@name="mp"]')[0].attrib['value'])
     # page_num = 1
@@ -53,9 +51,8 @@ try:
 except :
     try:
         #修改过的微博ID或域名号
-        u_flag = False
-        url = 'http://weibo.cn/%s?filter=1&page=1'%user_id
-        head_html = requests.get(url, cookies = cookie).content
+        url = 'http://weibo.cn/%s?filter=1&page='%user_id
+        head_html = requests.get("%s1"%(url), cookies = cookie).content
         selector = etree.HTML(head_html)
         page_num = (int)(selector.xpath('//input[@name="mp"]')[0].attrib['value'])
         # page_num = 1
@@ -107,12 +104,9 @@ print '－－－－－爬虫准备就绪－－－－－'
 for page in range(1,page_num+1):
     print '－－－－－抓取页面:%d－－－－－'%page
 
-    #获取lxml页面
-    if u_flag is True:
-        url = 'http://weibo.cn/u/%s?filter=1&page=%d'%(user_id,page)
-    else:
-        url = 'http://weibo.cn/%s?filter=1&page=%d'%(user_id,page)
+    url = "%s%d"%(url,page)
     print "URL => %s"%url
+    #获取lxml页面
     page_html = requests.get(url, cookies = cookie).content
 
     print '正在文字爬取...'
