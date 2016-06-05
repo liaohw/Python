@@ -37,9 +37,11 @@ else:
 
 cookie = {"Cookie": "xxx"}
 
+
 # 获取微博名
 try:
     # 普通微博ID
+    u_flag = True
     url = 'http://weibo.cn/u/%s?filter=1&page=1'%user_id
     head_html = requests.get(url, cookies = cookie).content
     selector = etree.HTML(head_html)
@@ -51,9 +53,9 @@ try:
 except :
     try:
         #修改过的微博ID或域名号
+        u_flag = False
         url = 'http://weibo.cn/%s?filter=1&page=1'%user_id
         head_html = requests.get(url, cookies = cookie).content
-        open('./tt.html','wb').write(head_html)
         selector = etree.HTML(head_html)
         page_num = (int)(selector.xpath('//input[@name="mp"]')[0].attrib['value'])
         # page_num = 1
@@ -86,7 +88,7 @@ result = '－－－－－微博用户ID : %s\n'%user_id
 urllist_set = set()
 weibo_count = 0
 image_count = 0
-filter_flag = 1 #1原创，0所有
+
 
 run_path = "%s/%s_%s"%(os.getcwd(),user_id,user_name)
 if os.path.exists(run_path) is False:
@@ -106,7 +108,10 @@ for page in range(1,page_num+1):
     print '－－－－－抓取页面:%d－－－－－'%page
 
     #获取lxml页面
-    url = 'http://weibo.cn/u/%s?filter=%d&page=%d'%(user_id,filter_flag,page)
+    if u_flag is True:
+        url = 'http://weibo.cn/u/%s?filter=1&page=%d'%(user_id,page)
+    else:
+        url = 'http://weibo.cn/%s?filter=1&page=%d'%(user_id,page)
     print "URL => %s"%url
     page_html = requests.get(url, cookies = cookie).content
 
