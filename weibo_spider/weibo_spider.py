@@ -69,7 +69,7 @@ if page_num == 50:
         exit (0)
 elif page_num > 5:
     _page_num = (int)(raw_input(u"该微博页数太多，只趴取前面的多少页: \n"))
-    if _page_num < page_num and _page_num > 0 :
+    if _page_num <= page_num and _page_num > 0 :
         page_num = _page_num
     else:
         print '输入页数有误!'
